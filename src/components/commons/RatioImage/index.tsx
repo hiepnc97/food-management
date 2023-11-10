@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./AspectRatioComponent.scss";
 import { GiftIcon } from "@/components/icons/IconGift";
 
@@ -18,25 +18,28 @@ const AspectRatioComponent = ({
   className,
 }: IProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [pillColor, setPillColor] = useState('blue');
+  const [pillColor, setPillColor] = useState("blue");
+  const [promotionComponent, setPromotionComponent] =
+    useState<React.ReactNode | null>(null);
 
-  const ImagePill = () => {
-
+  useEffect(() => {
     switch (promotion) {
       case "gift":
-        setPillColor('blue');
-        return <GiftIcon />;
+        setPillColor("blue");
+        setPromotionComponent(<GiftIcon />);
+        break;
       case "discount":
-        setPillColor('pink');
-        return <span>%</span>;
+        setPillColor("pink");
+        setPromotionComponent(<span>%</span>);
+        break;
       case "1+1":
-        setPillColor('purple');
-        return <span>1+1</span>;
+        setPillColor("purple");
+        setPromotionComponent(<span>1+1</span>);
+        break;
       default:
-        return null;
+        setPromotionComponent(null);
     }
-  }
-  
+  }, [promotion]);
 
   return (
     <div
@@ -49,8 +52,14 @@ const AspectRatioComponent = ({
         alt="food image"
         onLoad={() => setIsLoaded(true)}
       />
-      {isLoaded && promotion && <div className={`aspect-ratio-container__pill ${pillColor}`}><ImagePill /></div>}
-      {!isLoaded && <div className="aspect-ratio-container__lazy skeleton-loading"></div>}
+      {isLoaded && promotion && (
+        <div className={`aspect-ratio-container__pill ${pillColor}`}>
+          {promotionComponent}
+        </div>
+      )}
+      {!isLoaded && (
+        <div className="aspect-ratio-container__lazy skeleton-loading"></div>
+      )}
     </div>
   );
 };

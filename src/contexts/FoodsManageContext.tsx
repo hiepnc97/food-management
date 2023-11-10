@@ -16,6 +16,7 @@ interface FoodsManageContext {
   visibleItems: number;
   setVisibleItems: (visibleItems: number) => void;
   setActiveTab: (id: string) => void;
+  setText: (value: string) => void;
 }
 
 type Props = {
@@ -29,6 +30,7 @@ const FoodsManageContextDefaultValues: FoodsManageContext = {
   isShowMore: false,
   setVisibleItems: () => {},
   setActiveTab: () => {},
+  setText: () => {},
 };
 
 export const FoodsManageContext = createContext<FoodsManageContext>(
@@ -39,6 +41,7 @@ export const useFoodsManageContext = () => useContext(FoodsManageContext);
 
 export const FoodsManageProvider = ({ children }: Props) => {
   const [visibleItems, setVisibleItems] = useState<number>(9);
+  const [text, setText] = useState<string>("");
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
   const { data } = useFoods();
   const [activeTab, setActiveTab] = useState<string>("");
@@ -48,16 +51,17 @@ export const FoodsManageProvider = ({ children }: Props) => {
         .filter((item) => {
           if (!activeTab) return item;
           return item.categoryId === activeTab;
-        })|| []
+        })
+        .filter((item) => {
+          if (!text) return item;
+          return item.restaurant.includes(text);
+        }) || []
     );
-  }, [activeTab, data?.foods]);
+  }, [activeTab, data?.foods, text]);
 
   const availableFoodsList = useMemo(() => {
-    return (
-      foodsByCategory.slice(0, visibleItems) || []
-    );
+    return foodsByCategory.slice(0, visibleItems) || [];
   }, [foodsByCategory, visibleItems]);
-
 
   useEffect(() => {
     if (data?.foods) {
@@ -73,6 +77,7 @@ export const FoodsManageProvider = ({ children }: Props) => {
     setVisibleItems,
     setActiveTab,
     activeTab,
+    setText,
   };
 
   return (
