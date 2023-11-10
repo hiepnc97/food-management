@@ -1,5 +1,4 @@
 .card-item {
-  width: 300px;
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -11,6 +10,7 @@
   }
 
   &__content {
+    background-color: #ffffff;
     padding: 16px;
 
     &__title {
@@ -25,12 +25,22 @@
       margin-top: 10px;
 
       .tag {
-        background-color: #e6e6e6;
+        background-color: #F7F8FA;
         color: #333;
         padding: 5px 10px;
         border-radius: 6px;
-        margin-right: 5px;
+        margin-right: 8px;
         margin-bottom: 5px;
+        align-items: center;
+        display: flex;
+
+        svg {
+          margin-right: 5px;
+        }
+
+        &__new {
+          color: #2EBD93;
+        }
       }
     }
   }
