@@ -1,0 +1,50 @@
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: unset;
+  margin: 40px 0;
+
+  @include min-sm {
+    gap: 12px;
+  }
+
+  @include min-sm {
+    gap: 24px;
+  }
+
+  @include min-md {
+    gap: 36px;
+  }
+}
+
+.cards-wrapper {
+  width: 100%;
+
+  .card-item {
+
+    &:nth-child(3n) {
+      margin-right: 0;
+    }
+  }
+}
+
+.cards-action {
+  margin: 0 auto;
+  text-align: center;
+
+  .show-more-button {
+    width: 150px;
+    color: #000;
+    border: 1px solid #FFC637;
+    background-color: transparent;
+
+    &:focus {
+      outline: 1px solid #FFC637;
+    }
+
+    &:hover {
+      background-color: #FFC637;
+      border: 1px solid #FFC637;
+    }
+  }
+}

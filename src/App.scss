@@ -1,21 +1,11 @@
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.card {
-  background-color: #f9f9f9;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 20px;
-  margin-top: 20px;
+.app {
+  margin: 40px 0;
 }
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
+  color: #f9f9f9;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
@@ -24,9 +14,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;

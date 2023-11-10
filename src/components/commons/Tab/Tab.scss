@@ -1,0 +1,46 @@
+.tab {
+  margin-top: 40px;
+  max-width: 600px;
+  width: fit-content;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid #FFC637;
+
+  .tab-item {
+    color: #000;
+    border-radius: 0;
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    position: relative;
+    font-weight: 400;
+
+    &:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      width: 1px;
+      height: 100%;
+      background-color: #FFC637;
+    }
+
+    &:focus-visible,
+    &:focus {
+      outline: none;
+    }
+
+    &:hover {
+      border: none;
+    }
+  }
+
+  .active {
+    background-color: #FFC637;
+  }
+}

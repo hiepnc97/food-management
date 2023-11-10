@@ -1,21 +1,37 @@
-import { useState } from "react";
-import reactLogo from "@/assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.scss";
+import SearchInput from "@/components/commons/SearchInput";
+import Tab from "./components/commons/Tab";
+import Container from "./components/commons/Container";
+import Cards from "./components/contents/Cards";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useState } from "react";
+import { FoodsManageProvider } from "./contexts/FoodsManageContext";
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [queryClient] = useState(
+    () =>
+      new QueryClient({
+        defaultOptions: {
+          queries: {
+            refetchOnWindowFocus: false,
+            networkMode: "always",
+          },
+        },
+      })
+  );
 
   return (
-    <>
-      <div className="container">
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
+    <QueryClientProvider client={queryClient}>
+      <FoodsManageProvider>
+        <div className="app">
+          <Container>
+            <SearchInput />
+            <Tab />
+            <Cards />
+          </Container>
         </div>
-      </div>
-    </>
+      </FoodsManageProvider>
+    </QueryClientProvider>
   );
 }
 

@@ -3,35 +3,12 @@
 }
 
 $grid-breakpoints: (
-  xxs: 360px,
   xs: 481px,
   sm: 768px,
-  smplus: 769px,
   md: 992px,
   lg: 1024px,
   xl: 1200px,
-  xxl: 1450px,
-  xxxl: 1650px,
-  largeDesktop: 2000px,
 );
-
-@mixin large-desktop {
-  @media screen and (min-width: #{breakpoints(largeDesktop)}) {
-    @content;
-  }
-}
-
-@mixin min-xxxl {
-  @media screen and (min-width: #{breakpoints(xxxl)}) {
-    @content;
-  }
-}
-
-@mixin min-xxl {
-  @media screen and (min-width: #{breakpoints(xxl)}) {
-    @content;
-  }
-}
 
 @mixin min-xl {
   @media screen and (min-width: #{breakpoints(xl)}) {
@@ -57,20 +34,9 @@ $grid-breakpoints: (
   }
 }
 
-@mixin min-smplus {
-  @media (min-width: #{breakpoints(sm) + 1px}) {
-    @content;
-  }
-}
-
 @mixin min-xs {
   @media screen and (min-width: #{breakpoints(xs)}) {
     @content;
   }
 }
 
-@mixin min-xxs {
-  @media screen and (min-width: #{breakpoints(xxs)}) {
-    @content;
-  }
-}
