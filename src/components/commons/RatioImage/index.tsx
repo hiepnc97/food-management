@@ -26,15 +26,15 @@ const AspectRatioComponent = ({
     switch (promotion) {
       case "gift":
         setPillColor("blue");
-        setPromotionComponent(<GiftIcon />);
+        setPromotionComponent(<GiftIcon data-testid="gift-icon" />);
         break;
       case "discount":
         setPillColor("pink");
-        setPromotionComponent(<span>%</span>);
+        setPromotionComponent(<span data-testid="discount-pill">%</span>);
         break;
       case "1+1":
         setPillColor("purple");
-        setPromotionComponent(<span>1+1</span>);
+        setPromotionComponent(<span data-testid="11-pill">1+1</span>);
         break;
       default:
         setPromotionComponent(null);
@@ -45,6 +45,7 @@ const AspectRatioComponent = ({
     <div
       className={`aspect-ratio-container ${className}`}
       style={{ paddingTop: `${(height / width) * 100}%` }}
+      data-testid="aspect-ratio-container"
     >
       <img
         className="aspect-ratio-container__content"
@@ -53,12 +54,18 @@ const AspectRatioComponent = ({
         onLoad={() => setIsLoaded(true)}
       />
       {isLoaded && promotion && (
-        <div className={`aspect-ratio-container__pill ${pillColor}`}>
+        <div
+          className={`aspect-ratio-container__pill ${pillColor}`}
+          data-testid="aspect-ratio-pill"
+        >
           {promotionComponent}
         </div>
       )}
       {!isLoaded && (
-        <div className="aspect-ratio-container__lazy skeleton-loading"></div>
+        <div
+          className="aspect-ratio-container__lazy skeleton-loading"
+          data-testid="aspect-ratio-container__lazy"
+        ></div>
       )}
     </div>
   );

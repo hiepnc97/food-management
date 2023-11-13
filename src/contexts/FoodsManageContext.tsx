@@ -45,17 +45,18 @@ export const FoodsManageProvider = ({ children }: Props) => {
   const [isShowMore, setIsShowMore] = useState<boolean>(false);
   const { data } = useFoods();
   const [activeTab, setActiveTab] = useState<string>("");
+
   const foodsByCategory = useMemo(() => {
     return (
-      data?.foods
-        .filter((item) => {
-          if (!activeTab) return item;
-          return item.categoryId === activeTab;
-        })
-        .filter((item) => {
-          if (!text) return item;
-          return item.restaurant.includes(text);
-        }) || []
+      data?.foods.filter((item) => {
+        return (
+          (!activeTab || item.categoryId === activeTab) &&
+          (!text ||
+            item.restaurant
+              ?.toLocaleLowerCase()
+              .includes(text.toLocaleLowerCase()))
+        );
+      }) || []
     );
   }, [activeTab, data?.foods, text]);
 
