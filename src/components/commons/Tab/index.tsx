@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { TabProps } from "@/types";
 import "./Tab.scss";
 import { useCategories } from "@/query/foods";
-import { useFoodsManageContext } from "@/contexts/FoodsManageContext";
+import { DEFAULT_ITEMS, useFoodsManageContext } from "@/contexts/FoodsManageContext";
 
 export default function Tab() {
   const { data } = useCategories();
@@ -27,7 +27,7 @@ export default function Tab() {
 
   const openTab = (tabName: string) => {
     setActiveTab(tabName);
-    setVisibleItems(9);
+    setVisibleItems(DEFAULT_ITEMS);
   };
 
   return (

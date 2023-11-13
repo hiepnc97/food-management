@@ -23,9 +23,11 @@ type Props = {
   children: ReactNode;
 };
 
+export const DEFAULT_ITEMS = 9;
+
 const FoodsManageContextDefaultValues: FoodsManageContext = {
   foods: [],
-  visibleItems: 9,
+  visibleItems: DEFAULT_ITEMS,
   activeTab: "",
   isShowMore: false,
   setVisibleItems: () => {},
@@ -40,15 +42,16 @@ export const FoodsManageContext = createContext<FoodsManageContext>(
 export const useFoodsManageContext = () => useContext(FoodsManageContext);
 
 export const FoodsManageProvider = ({ children }: Props) => {
-  const [visibleItems, setVisibleItems] = useState<number>(9);
-  const [text, setText] = useState<string>("");
-  const [isShowMore, setIsShowMore] = useState<boolean>(false);
-  const { data } = useFoods();
-  const [activeTab, setActiveTab] = useState<string>("");
+  const [visibleItems, setVisibleItems] = useState(DEFAULT_ITEMS);
+  const [text, setText] = useState("");
+  const [isShowMore, setIsShowMore] = useState(false);
+  const { data: foods } = useFoods();
+  const [activeTab, setActiveTab] = useState("");
 
   const foodsByCategory = useMemo(() => {
+    if (!foods) return [];
     return (
-      data?.foods.filter((item) => {
+      foods.filter((item) => {
         return (
           (!activeTab || item.categoryId === activeTab) &&
           (!text ||
@@ -58,26 +61,26 @@ export const FoodsManageProvider = ({ children }: Props) => {
         );
       }) || []
     );
-  }, [activeTab, data?.foods, text]);
+  }, [activeTab, foods, text]);
 
   const availableFoodsList = useMemo(() => {
     return foodsByCategory.slice(0, visibleItems) || [];
   }, [foodsByCategory, visibleItems]);
 
   useEffect(() => {
-    if (data?.foods) {
+    if (foods) {
       if (visibleItems < foodsByCategory.length) setIsShowMore(true);
       else setIsShowMore(false);
     }
-  }, [data, foodsByCategory.length, visibleItems]);
+  }, [foods, foodsByCategory.length, visibleItems]);
 
   const value = {
     foods: availableFoodsList,
     isShowMore,
     visibleItems,
+    activeTab,
     setVisibleItems,
     setActiveTab,
-    activeTab,
     setText,
   };
 

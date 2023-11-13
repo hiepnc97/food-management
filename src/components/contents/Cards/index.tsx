@@ -1,6 +1,6 @@
 import CardItem from "../CardItem";
 import "./Cards.scss";
-import { useFoodsManageContext } from "@/contexts/FoodsManageContext";
+import { DEFAULT_ITEMS, useFoodsManageContext } from "@/contexts/FoodsManageContext";
 
 export default function Cards() {
   const { foods, isShowMore, visibleItems, setVisibleItems } =
@@ -18,7 +18,7 @@ export default function Cards() {
         {isShowMore && (
           <button
             className="show-more-button"
-            onClick={() => setVisibleItems(visibleItems + 9)}
+            onClick={() => setVisibleItems(visibleItems + DEFAULT_ITEMS)}
           >
             + Show More
           </button>

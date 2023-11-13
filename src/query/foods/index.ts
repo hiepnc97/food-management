@@ -5,4 +5,4 @@ export const useCategories = () =>
   useQuery({ queryKey: ["categories"], queryFn: () => getCategories() });
 
 export const useFoods = () =>
-  useQuery({ queryKey: ["foods"], queryFn: () => getFoods() });
+  useQuery({ queryKey: ["foods"], queryFn: () => getFoods(), select: (data) => data.foods });
