@@ -68,10 +68,9 @@ export const FoodsManageProvider = ({ children }: Props) => {
   }, [foodsByCategory, visibleItems]);
 
   useEffect(() => {
-    if (foods) {
-      if (visibleItems < foodsByCategory.length) setIsShowMore(true);
-      else setIsShowMore(false);
-    }
+    if (!foods) return;
+    if (visibleItems < foodsByCategory.length) setIsShowMore(true);
+    else setIsShowMore(false);
   }, [foods, foodsByCategory.length, visibleItems]);
 
   const value = {
